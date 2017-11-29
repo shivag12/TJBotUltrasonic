@@ -1,8 +1,5 @@
 var Gpio = require('pigpio').Gpio,
-    motor = new Gpio(08, {mode: Gpio.OUTPUT}),
-    pulseWidth = 1000,
-    increment = 500;
-var trigger = new Gpio(23, {mode: Gpio.OUTPUT}),
+  trigger = new Gpio(23, {mode: Gpio.OUTPUT}),
   echo = new Gpio(24, {mode: Gpio.INPUT, alert: true});
 
 // The number of microseconds it takes sound to travel 1cm at 20 degrees celcius
@@ -27,15 +24,8 @@ trigger.digitalWrite(0); // Make sure trigger is low
   });
 }());
 
- setInterval(function () {
-
-    trigger.trigger(10, 1);
-    motor.servoWrite(pulseWidth);
-    //console.log(pulseWidth);   
-    pulseWidth += increment;
-    if (pulseWidth >= 1500) {
-      increment = -500;
-    } else if (pulseWidth <= 999) {
-      increment = 500;
-    }
-  }, 1000);
+// Trigger a distance measurement once per second
+setInterval(function () {
+  console.log("Trigger");
+  trigger.trigger(10, 1); // Set trigger high for 10 microseconds
+}, 1000);
