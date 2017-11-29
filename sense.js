@@ -1,3 +1,4 @@
+//Added a comment to test pull request 
 var Gpio = require('pigpio').Gpio,
     motor = new Gpio(08, {mode: Gpio.OUTPUT}),
     pulseWidth = 1000,
